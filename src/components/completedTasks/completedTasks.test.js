@@ -2,7 +2,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { TasksContext } from '../../utils/contexts/taskContext';
-import CompletedTasks from './CompletedTasks';
+import CompletedTasks from './index';
 
 // Groupe de tests décrivant le comportement attendu du composant `CompletedTasks`.
 describe('CompletedTasks', () => {
