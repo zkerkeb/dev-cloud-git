@@ -17,3 +17,4 @@ jobs:
       run: npm test
     - name: Build
       run: npm run build
+      # SI SA MARCHe on deploy sur github pages
