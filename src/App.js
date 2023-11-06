@@ -1,5 +1,5 @@
 import TodoList from './components/todoList';
-// w
+// we
 const App = () => {
   return <TodoList />;
 };
