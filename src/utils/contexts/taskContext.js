@@ -3,5 +3,3 @@ import {createContext} from 'react';
 // Il sera utilise dans src/components/todoList/index.js
 // C'est pour faire propre
 export const TasksContext = createContext();
-
-const wesh3 = 'wesh';

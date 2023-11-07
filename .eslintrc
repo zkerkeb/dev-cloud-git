@@ -2,6 +2,7 @@
   "extends": ["react-app", "plugin:prettier/recommended"],
   "plugins": ["react", "prettier"],
   "rules": {
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "no-unused-vars": "error"
   }
 }
