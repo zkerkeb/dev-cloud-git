@@ -1,66 +1,89 @@
-// Importation des outils nécessaires à partir des bibliothèques de test.
-import { act } from 'react-dom/test-utils';
-import { renderHook } from '@testing-library/react-hooks';
+// Importation des fonctions nécessaires pour tester des hooks React.
+import {act, renderHook} from '@testing-library/react-hooks';
+// Importation du hook `useTasks` qui doit être testé.
+import useTasks from './useTasks'; // Assurez-vous que le chemin d'accès est correct.
 
-import useTasks from './path-to-your-hook';  // Remplacez par le chemin d'accès réel de votre hook.
-
+// `describe` permet de regrouper plusieurs tests relatifs au hook `useTasks`.
 describe('useTasks Hook', () => {
-    // Avant chaque test, nous simulons les méthodes `getItem` et `setItem` de `localStorage`
-    // pour éviter d'utiliser le `localStorage` réel pendant les tests.
-    beforeEach(() => {
-        Object.defineProperty(window, 'localStorage', {
-            value: {
-                getItem: jest.fn(),
-                setItem: jest.fn()
-            },
-            writable: true
-        });
+  // `beforeEach` est une fonction qui est exécutée avant chaque test.
+  // Ici, elle est utilisée pour simuler les méthodes `getItem` et `setItem` de `localStorage`.
+  beforeEach(() => {
+    // Mock de `localStorage.getItem` pour retourner un tableau vide sous forme de chaîne JSON.
+    Storage.prototype.getItem = jest.fn(() => JSON.stringify([]));
+    // Mock de `localStorage.setItem` pour qu'il puisse être surveillé pendant les tests.
+    Storage.prototype.setItem = jest.fn();
+  });
+
+  // Test pour s'assurer que le hook charge correctement les tâches depuis `localStorage`.
+  it('should load tasks from local storage on initial render', () => {
+    // Utilisation de `renderHook` pour exécuter le hook `useTasks`.
+    const {result} = renderHook(() => useTasks());
+    // Vérification que `tasks` est initialisé à un tableau vide.
+    expect(result.current.tasks).toEqual([]);
+  });
+
+  // Test pour vérifier que le hook peut ajouter une nouvelle tâche.
+  it('should add a new task', () => {
+    // On exécute à nouveau le hook pour ce test.
+    const {result} = renderHook(() => useTasks());
+
+    // `act` est utilisé pour exécuter des mises à jour de l'état qui pourraient avoir des effets.
+    act(() => {
+      // Ajout d'une nouvelle tâche appelée 'New Task'.
+      result.current.addTask('New Task');
     });
 
-    // Test pour vérifier le chargement des tâches depuis le local storage.
-    it('should load tasks from local storage on initial render', () => {
-        // Simuler une liste de tâches dans le local storage.
-        window.localStorage.getItem.mockReturnValueOnce(JSON.stringify([{ id: 1, text: 'Task 1', completed: false }]));
+    // Vérification que la nouvelle tâche a bien été ajoutée.
+    expect(result.current.tasks).toHaveLength(1);
+    expect(result.current.tasks[0].text).toBe('New Task');
+    // Vérification que `localStorage.setItem` a été appelé avec les bonnes données.
+    expect(localStorage.setItem).toHaveBeenCalledWith(
+      'tasks',
+      JSON.stringify(result.current.tasks),
+    );
+  });
 
-        const { result } = renderHook(() => useTasks());
+  // Test pour vérifier que le hook peut changer l'état d'une tâche (complétée ou non).
+  it('should toggle a task', () => {
+    // On exécute le hook.
+    const {result} = renderHook(() => useTasks());
 
-        expect(result.current.tasks).toEqual([{ id: 1, text: 'Task 1', completed: false }]);
+    // Ajout d'une tâche qui sera basculée.
+    act(() => {
+      result.current.addTask('Toggle Task');
     });
 
-    // Test pour vérifier l'ajout d'une nouvelle tâche.
-    it('should add a new task', () => {
-        const { result } = renderHook(() => useTasks());
+    // On sauvegarde l'ID de la nouvelle tâche pour l'utiliser dans le test.
+    const taskId = result.current.tasks[0].id;
 
-        act(() => {
-            result.current.addTask('New Task');
-        });
-
-        expect(result.current.tasks[0].text).toEqual('New Task');
-        expect(window.localStorage.setItem).toHaveBeenCalled();
+    // On bascule l'état de la tâche.
+    act(() => {
+      result.current.toggleTask(taskId);
     });
 
-    // Test pour basculer l'état d'une tâche.
-    it('should toggle a task', () => {
-        const { result } = renderHook(() => useTasks());
+    // Vérification que l'état de la tâche a bien été modifié.
+    expect(result.current.tasks[0].completed).toBe(true);
+  });
 
-        act(() => {
-            result.current.addTask('Toggle Task');
-            result.current.toggleTask(result.current.tasks[0].id);
-        });
+  // Test pour vérifier que le hook peut supprimer une tâche.
+  it('should delete a task', () => {
+    // On exécute le hook.
+    const {result} = renderHook(() => useTasks());
 
-        expect(result.current.tasks[0].completed).toBe(true);
+    // Ajout d'une tâche qui sera ensuite supprimée.
+    act(() => {
+      result.current.addTask('Task to Delete');
     });
 
-    // Test pour supprimer une tâche.
-    it('should delete a task', () => {
-        const { result } = renderHook(() => useTasks());
+    // On sauvegarde l'ID de la nouvelle tâche pour l'utiliser dans le test de suppression.
+    const taskId = result.current.tasks[0].id;
 
-        act(() => {
-            result.current.addTask('Task to Delete');
-            result.current.deleteTask(result.current.tasks[0].id);
-        });
-
-        expect(result.current.tasks.length).toBe(0);
+    // On supprime la tâche.
+    act(() => {
+      result.current.deleteTask(taskId);
     });
+
+    // Vérification que la tâche a bien été supprimée.
+    expect(result.current.tasks).toHaveLength(0);
+  });
 });
-
