@@ -2,19 +2,19 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ main, 'ci-cd' ]
+    branches: [main, 'ci-cd']
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Install Dependencies
-      run: npm install
-    - name: Run Tests
-      run: npm test
-    - name: Build
-      run: npm run build
-      # SI SA MARCHe on deploy sur github pages
+      - uses: actions/checkout@v2
+      - name: Install Dependencies
+        run: npm install --legacy-peer-deps
+      - name: Run Tests
+        run: npm test
+      - name: Build
+        run: npm run build
+        # SI SA MARCHe on deploy sur github pages
