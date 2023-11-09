@@ -1,10 +1,13 @@
-import TodoList from './components/todoList';
 // we
+import Counter from './components/counter';
+import Title from './components/title';
+
 const App = () => {
   return (
     <>
-      <p>test ok</p>
-      <TodoList />
+      <Title label="VIVE LA FRANCE"></Title>
+      <Title label="test ok"></Title>
+      <Counter></Counter>
     </>
   );
 };

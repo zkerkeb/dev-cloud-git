@@ -2,7 +2,7 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [main, 'ci-cd']
+    branches: [main]
   pull_request:
     branches: [main]
 
@@ -11,10 +11,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
       - name: Install Dependencies
         run: npm install --legacy-peer-deps
+
       - name: Run Tests
         run: npm test
+
       - name: Build
         run: npm run build
-        # SI SA MARCHe on deploy sur github pages
+
+      - name: Deploy to GitHub Pages
+        if: ${{ success() }}
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          branch: gh-pages # The branch the action should deploy to.
+          folder: build # The folder the action should deploy.
+          token: ${{ secrets.GITHUB_TOKEN }} # The GitHub token for authentication.
