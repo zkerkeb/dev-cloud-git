@@ -7,7 +7,6 @@ const App = () => {
     <>
       <Title label="VIVE LA FRANCE"></Title>
       <Title label="test ok"></Title>
-      <Title label="test ok oooo"></Title>
       <Counter></Counter>
     </>
   );
