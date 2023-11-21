@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/dev-cloud-git/static/css/main.e6c13ad2.css",
-    "main.js": "/dev-cloud-git/static/js/main.192f474f.js",
+    "main.js": "/dev-cloud-git/static/js/main.c405cec5.js",
     "static/js/628.4914f37c.chunk.js": "/dev-cloud-git/static/js/628.4914f37c.chunk.js",
     "static/js/787.21ad4977.chunk.js": "/dev-cloud-git/static/js/787.21ad4977.chunk.js",
     "static/js/966.cd6040c5.chunk.js": "/dev-cloud-git/static/js/966.cd6040c5.chunk.js",
@@ -9,13 +9,13 @@
     "static/media/oui.jpg": "/dev-cloud-git/static/media/oui.38ad8d490937432b2d88.jpg",
     "index.html": "/dev-cloud-git/index.html",
     "main.e6c13ad2.css.map": "/dev-cloud-git/static/css/main.e6c13ad2.css.map",
-    "main.192f474f.js.map": "/dev-cloud-git/static/js/main.192f474f.js.map",
+    "main.c405cec5.js.map": "/dev-cloud-git/static/js/main.c405cec5.js.map",
     "628.4914f37c.chunk.js.map": "/dev-cloud-git/static/js/628.4914f37c.chunk.js.map",
     "787.21ad4977.chunk.js.map": "/dev-cloud-git/static/js/787.21ad4977.chunk.js.map",
     "966.cd6040c5.chunk.js.map": "/dev-cloud-git/static/js/966.cd6040c5.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.192f474f.js"
+    "static/js/main.c405cec5.js"
   ]
 }
