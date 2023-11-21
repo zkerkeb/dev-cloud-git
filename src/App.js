@@ -5,6 +5,8 @@ import Title from './components/title';
 import yamato from './assets/3d/yamato.gltf';
 import React, {lazy, Suspense} from 'react';
 import MyList from './components/myList';
+import OptimisticTaskList from './components/optimisticTaskList';
+import PromiseExemple from './components/promiseExemple';
 // import Search from './components/search';
 
 const Model3DViewer = lazy(() => import('./components/model3dViewer'));
@@ -24,6 +26,8 @@ const App = () => {
       }}>
       <Title label="VIVE LA FRANCE"></Title>
       <Title label="test ok"></Title>
+      <OptimisticTaskList></OptimisticTaskList>
+      <PromiseExemple></PromiseExemple>
       {/* <Search></Search> */}
       {/* <Counter></Counter> */}
       {/* <Suspense fallback={<div>Chargement...</div>}>
