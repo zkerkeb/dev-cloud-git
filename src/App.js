@@ -1,13 +1,9 @@
 // we
-import Counter from './components/counter';
-import Title from './components/title';
 // import Model3DViewer from './components/model3dViewer';
-import yamato from './assets/3d/yamato.gltf';
-import React, {lazy, Suspense} from 'react';
-import MyList from './components/myList';
-import OptimisticTaskList from './components/optimisticTaskList';
-import PromiseExemple from './components/promiseExemple';
+import React, {lazy} from 'react';
 // import Search from './components/search';
+import './app.css';
+import AppWithLayout from './config/appWithLayout';
 
 const Model3DViewer = lazy(() => import('./components/model3dViewer'));
 
@@ -15,29 +11,26 @@ const App = () => {
   const data = Array.from({length: 10000}, (_, index) => `Item ${index + 1}`);
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        gap: 20,
-        width: '100%',
-        height: '100%',
-      }}>
-      <Title label="VIVE LA FRANCE"></Title>
-      <Title label="test ok"></Title>
-      <OptimisticTaskList></OptimisticTaskList>
-      <PromiseExemple></PromiseExemple>
+    <>
+      <AppWithLayout></AppWithLayout>
+      {/* <CustomAudioPlayer />
+      <FullScreenDiv></FullScreenDiv>
+       */}
+      {/* <RotatingSphere></RotatingSphere> */}
+      {/* <DragAndDrop></DragAndDrop> */}
+      {/* <PromiseExemple></PromiseExemple> */}
       {/* <Search></Search> */}
       {/* <Counter></Counter> */}
+      {/* <OptimisticTaskList></OptimisticTaskList> */}
+
       {/* <Suspense fallback={<div>Chargement...</div>}>
-        <Model3DViewer modelUrl={yamato}></Model3DViewer>
-      </Suspense> */}
+    <Model3DViewer modelUrl={yamato}></Model3DViewer>
+  </Suspense> */}
       {/* <div>
-        <h1>Ma Liste Virtuelle</h1>
-        <MyList data={data} />
-      </div> */}
-    </div>
+    <h1>Ma Liste Virtuelle</h1>
+    <MyList data={data} />
+  </div> */}
+    </>
   );
 };
 
