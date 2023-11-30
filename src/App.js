@@ -3,7 +3,8 @@
 import React, {lazy} from 'react';
 // import Search from './components/search';
 import './app.css';
-import AppWithLayout from './config/appWithLayout';
+import SocketChat from './components/socketChat';
+// import AppWithLayout from './config/appWithLayout';
 
 const Model3DViewer = lazy(() => import('./components/model3dViewer'));
 
@@ -12,7 +13,8 @@ const App = () => {
 
   return (
     <>
-      <AppWithLayout></AppWithLayout>
+      <SocketChat></SocketChat>
+      {/* <AppWithLayout></AppWithLayout> */}
       {/* <CustomAudioPlayer />
       <FullScreenDiv></FullScreenDiv>
        */}
